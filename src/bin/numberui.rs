@@ -5,6 +5,8 @@ use gtk4::{self, Application, ApplicationWindow, Button, Label};
 use rand::Rng;
 
 use std::cell::Cell;
+use std::fs;
+use std::path::Path;
 use std::rc::Rc;
 
 fn main() {
@@ -19,7 +21,13 @@ fn main() {
 
 fn build_ui(application: &Application) {
     // Init `gtk::Builder` from file
-    let builder = gtk4::Builder::from_string(include_str!("number.ui"));
+    let builder = gtk4::Builder::from_string(
+        &fs::read_to_string(
+            // use build time environment to substitute location of assets (share) folder
+            Path::new(option_env!("SHAREDIR").unwrap_or("assets")).join("number.ui"),
+        )
+        .expect("Unable to read in ui definition file."),
+    );
 
     // get window from glade file (gtk builder)
     let window: ApplicationWindow = builder
