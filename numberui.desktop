@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Number counter
+GenericName=Number counter
+Comment=Number counter for randomly generating a number or counting a number up or down.
+Categories=Utility
+Icon=numberui
+Exec=numberui
+Terminal=false
+Type=Application
